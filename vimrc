@@ -30,7 +30,7 @@ autocmd VimEnter * nested call LoadSession()
 
 set t_Co=256
 set background=dark
-colorscheme solarized
+colorscheme tomorrow-night
 highlight Normal ctermbg=none
 highlight NonText ctermbg=none
 highlight LineNr ctermbg=none
@@ -68,7 +68,8 @@ let g:bg_flag = 0
 
 function! ShowBackground()
   let g:bg_flag = 1
-  colorscheme solarized
+  let colors_name = tolower(g:colors_name)
+  execute 'colorscheme '.tolower(g:colors_name)
 endfunction 
 
 function! HideBackground()
