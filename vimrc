@@ -1,5 +1,5 @@
 call pathogen#infect()
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 runtime macros/matchit.vim
 
@@ -68,12 +68,12 @@ let g:bg_flag = 0
 
 function! ShowBackground()
   let g:bg_flag = 1
-  let colors_name = tolower(g:colors_name)
   execute 'colorscheme '.tolower(g:colors_name)
 endfunction 
 
 function! HideBackground()
   let g:bg_flag = 0
+  execute 'colorscheme '.tolower(g:colors_name)
   highlight Normal ctermbg=none
   highlight NonText ctermbg=none
   highlight LineNr ctermbg=none
@@ -251,9 +251,9 @@ function! MyTabLabel(n)
 
 endfunction
 
-set tabline=%!MyTabLine()
-set tabpagemax=15
+"set tabline=%!MyTabLine()
 
+set tabpagemax=15
 "good tab completion - press <tab> to autocomplete if there's a character
 "previously
 function! InsertTabWrapper()
@@ -336,8 +336,19 @@ function! GetSpecPath()
   return s
 endfunction
 
+"CTRLP
 let g:ctrlp_prompt_mappings = {
       \ 'AcceptSelection("h")': ['<c-x>', '<c-s>'],
       \ 'AcceptSelection("e")': ['<c-r>', '<c-space>'],
       \ 'AcceptSelection("t")': ['<cr>', '<c-t>', '<2-LeftMouse>'],
       \ }
+
+let g:airline_powerline_fonts = 1
+"Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline_theme = 'powerlineish'
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#fnamemod = ':p:t'
