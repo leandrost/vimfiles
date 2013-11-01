@@ -92,9 +92,10 @@ endfunction
 map <C-l> :let @/=""<CR>
 map <F2> :NERDTreeToggle<CR>
 map <F3> :%!xmllint --encode UTF-8 --format -<CR>
-map <F6> binding.pry<ESC>
 map <F5> :e<CR>
+map <F6> obinding.pry<ESC>
 map <F12> :call ToggleBackground()<CR>
+map <S-F6> Obinding.pry<ESC>
 
 "COPY, PASTE, DELETE
 map \p "+p
