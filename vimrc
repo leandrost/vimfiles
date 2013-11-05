@@ -52,8 +52,8 @@ set mouse=a
 "let html_fold=1
 "autocmd Syntax rb,javascript,vim,gitcommit,xml,html,xhtml set foldmethod=syntax
 "autocmd Syntax rb,javascript,vim,gitcommit,xml,html,xhtml normal zR
-autocmd BufRead,BufNewFile *spec.js  set filetype=javascript.javascript-mocha
-autocmd BufRead,BufNewFile *Spec.js  set filetype=javascript.javascript-mocha
+autocmd BufRead,BufNewFile *spec.js  set filetype=javascript.javascript-test
+autocmd BufRead,BufNewFile *Spec.js  set filetype=javascript.javascript-test
 autocmd BufRead,BufNewFile *.erb  set filetype=eruby.html
 autocmd BufRead,BufNewFile *.exbl  set filetype=ruby.html
 autocmd BufRead,BufNewFile *.srt set filetype=srt
