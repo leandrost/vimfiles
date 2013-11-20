@@ -1,21 +1,32 @@
+"""  Pathogen Initialization
+runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
-"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+call pathogen#helptags()
 
+""" General Config
 runtime macros/matchit.vim
-
 syntax on
-set encoding=utf-8
+set number
 set nowrap
+set mouse=a
+set encoding=utf-8
 
-filetype plugin indent on
-set autoindent
-set expandtab
-
+" only on WINDOWS
 if has("win32")
   set runtimepath=~/.vim,$VIMRUNTIME
   set backspace=indent,eol,start whichwrap+=<,>,[,]
   imap <C-S-V> <ESC>"+gP
 endif
+
+""" Statusbar
+set laststatus=2
+set ruler
+set showcmd
+
+""" Indentation 
+set autoindent
+set expandtab
+filetype plugin indent on
 
 autocmd FileType * set tabstop=2 
 autocmd FileType * set softtabstop=2
@@ -25,9 +36,49 @@ autocmd FileType python,java set tabstop=4
 autocmd FileType python,java set tabstop=4 
 autocmd FileType python,java set softtabstop=4
 
+" Display tabs and trailing spaces visually
+set list listchars=tab:\ \ ,trail:·
+
+"""" Session
+let g:sessions_dir = $HOME."/.vim/sessions/"
+let g:default_session = "default"
+let g:myfinance_session = "myfinance"
+
+function! MakeSession(session_name)
+  execute "mksession! ".g:sessions_dir.a:session_name.".vim"
+endfunction
+
+function! RecoverSession(session_name)
+  let session_file = g:sessions_dir.a:session_name.".vim"
+  if filereadable(session_file)
+    execute "source ".session_file
+    call HideBackground()
+  end
+endfunction
+
+function! SaveSession()
+  if !isdirectory(g:sessions_dir)
+    call mkdir(g:sessions_dir)
+  endif
+  if getcwd() == $HOME."/projects/myfinance/src"
+    call MakeSession(g:myfinance_session)
+  else
+    call MakeSession(g:default_session)
+  endif
+endfunction
+
+function! LoadSession()
+  if argc() == 0 
+    let myfinance_path = $HOME."/projects/myfinance/src"
+    let session_name = getcwd() == myfinance_path ? g:myfinance_session : g:default_session
+    call RecoverSession(session_name)
+  endif
+endfunction
+
 autocmd VimLeave * nested call SaveSession()
 autocmd VimEnter * nested call LoadSession()
 
+""" Colors
 set t_Co=256
 set background=dark
 colorscheme tomorrow-night
@@ -36,34 +87,6 @@ highlight NonText ctermbg=none
 highlight LineNr ctermbg=none
 highlight rubydefine ctermbg=none
 
-set number
-set hlsearch
-set incsearch
-
-
-set laststatus=2
-
-set ruler
-set showcmd
-set mouse=a
-
-"let javaScript_fold=1
-"let ruby_fold=1
-"let html_fold=1
-"autocmd Syntax rb,javascript,vim,gitcommit,xml,html,xhtml set foldmethod=syntax
-"autocmd Syntax rb,javascript,vim,gitcommit,xml,html,xhtml normal zR
-autocmd BufRead,BufNewFile *spec.js  set filetype=javascript.javascript-test
-autocmd BufRead,BufNewFile *Spec.js  set filetype=javascript.javascript-test
-autocmd BufRead,BufNewFile *.erb  set filetype=eruby.html
-autocmd BufRead,BufNewFile *.exbl  set filetype=ruby.html
-autocmd BufRead,BufNewFile *.srt set filetype=srt
-autocmd BufRead,BufNewFile *.vb set filetype=vb
-autocmd BufRead,BufNewFile *.ofx set filetype=xml
-
-"EMMET
-imap <c-j> <C-y>,
-
-"BACKGROUND CONFIG
 let g:bg_flag = 0
 
 function! ShowBackground()
@@ -88,6 +111,25 @@ function! ToggleBackground()
   endif
 endfunction
 
+""" Search
+set hlsearch
+set incsearch
+
+""" File types
+"let javaScript_fold=1
+"let ruby_fold=1
+"let html_fold=1
+"autocmd Syntax rb,javascript,vim,gitcommit,xml,html,xhtml set foldmethod=syntax
+"autocmd Syntax rb,javascript,vim,gitcommit,xml,html,xhtml normal zR
+autocmd BufRead,BufNewFile *spec.js  set filetype=javascript.javascript-test
+autocmd BufRead,BufNewFile *Spec.js  set filetype=javascript.javascript-test
+autocmd BufRead,BufNewFile *.erb  set filetype=eruby.html
+autocmd BufRead,BufNewFile *.exbl  set filetype=ruby.html
+autocmd BufRead,BufNewFile *.srt set filetype=srt
+autocmd BufRead,BufNewFile *.vb set filetype=vb
+autocmd BufRead,BufNewFile *.ofx set filetype=xml
+
+""" Key Mapping
 "CUSTOM MAPS
 map <C-l> :let @/=""<CR>
 map <F2> :NERDTreeToggle<CR>
@@ -123,17 +165,10 @@ map <S-Insert> <MiddleMouse>
 cmap w!! %!sudo tee > /dev/null %
 cmap qq tabclose
 
-"COMMANDS
-command! FF FufFile
-command! BG call ToggleBackground()
-command! S w !sudo tee %
-command! -nargs=1 MKS call MakeSession(<f-args>)
-command! -nargs=1 RSE call RecoverSession(<f-args>)
+"EMMET
+imap <c-j> <C-y>,
 
 "RSPEC
-map \r :let @+= "rspec ".GetSpecPath()<CR>
-map \l :let @+= "rspec ".GetSpecPath(). " -l ".line('.')<CR>
-
 function! RunRspec(args)
   let args = '' 
   if a:args != ''
@@ -149,41 +184,26 @@ function! RunRspec(args)
   let g:last_rspec = cmd
 endfunction
 
-"SESSIONS
-let g:sessions_dir = $HOME."/.vim/sessions/"
-let g:default_session = "default"
-let g:myfinance_session = "myfinance"
+function! GetSpecPath()
+  let s = expand('%')
 
-function! MakeSession(session_name)
-  execute "mksession! ".g:sessions_dir.a:session_name.".vim"
-endfunction
-
-function! RecoverSession(session_name)
-  let session_file = g:sessions_dir.a:session_name.".vim"
-  if filereadable(session_file)
-    execute "source ".session_file
-    call HideBackground()
-  end
-endfunction
-
-function! SaveSession()
-  if !isdirectory(g:sessions_dir)
-    call mkdir(g:sessions_dir)
+  if stridx(s, 'app/') >= 0
+    let s = substitute(s, 'app/', 'spec/', '') 
+    let s = substitute(s, '.rb', '_spec.rb', '') 
   endif
-  if getcwd() == $HOME."/projects/myfinance/src"
-    call MakeSession(g:myfinance_session)
-  else
-    call MakeSession(g:default_session)
-  endif
+
+  return s
 endfunction
 
-function! LoadSession()
-  if argc() == 0 
-    let myfinance_path = $HOME."/projects/myfinance/src"
-    let session_name = getcwd() == myfinance_path ? g:myfinance_session : g:default_session
-    call RecoverSession(session_name)
-  endif
-endfunction
+map \r :let @+= "rspec ".GetSpecPath()<CR>
+map \l :let @+= "rspec ".GetSpecPath(). " -l ".line('.')<CR>
+
+""" Commands
+command! FF FufFile
+command! BG call ToggleBackground()
+command! S w !sudo tee %
+command! -nargs=1 MKS call MakeSession(<f-args>)
+command! -nargs=1 RSE call RecoverSession(<f-args>)
 
 "CUSTOM TABS
 function! MyTabLine()
@@ -326,17 +346,6 @@ function! WriteCreatingDirs()
 endfunction
 command W call WriteCreatingDirs()
 
-function! GetSpecPath()
-  let s = expand('%')
-
-  if stridx(s, 'app/') >= 0
-    let s = substitute(s, 'app/', 'spec/', '') 
-    let s = substitute(s, '.rb', '_spec.rb', '') 
-  endif
-
-  return s
-endfunction
-
 "CTRLP
 let g:ctrlp_prompt_mappings = {
       \ 'AcceptSelection("h")': ['<c-x>', '<c-s>'],
@@ -344,8 +353,8 @@ let g:ctrlp_prompt_mappings = {
       \ 'AcceptSelection("t")': ['<cr>', '<c-t>', '<2-LeftMouse>'],
       \ }
 
-let g:airline_powerline_fonts = 1
 "Airline
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 let g:airline#extensions#tabline#show_buffers = 0
