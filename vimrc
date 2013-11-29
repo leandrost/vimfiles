@@ -41,18 +41,21 @@ set list listchars=tab:\ \ ,trail:·
 
 " ================ Completion =======================
 "
-" set wildmode=list:longest
-" set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
-" set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
-" set wildignore+=*vim/backups*
-" set wildignore+=*sass-cache*
-" set wildignore+=*DS_Store*
-" set wildignore+=vendor/rails/**
-" set wildignore+=vendor/cache/**
-" set wildignore+=*.gem
-" set wildignore+=log/**
-" set wildignore+=tmp/**
-" set wildignore+=*.png,*.jpg,*.gif
+set wildmode=list:longest
+set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
+"" set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
+"" set wildignore+=*vim/backups*
+"" set wildignore+=*sass-cache*
+"" set wildignore+=*DS_Store*
+set wildignore+=vendor/rails/**
+set wildignore+=vendor/cache/**
+set wildignore +=*.log
+set wildignore+=log/**
+set wildignore+=*/log/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpg,*.gif
+set wildignore +=*/.git
+set wildignore+=*.gem
 
 """" Session
 let g:sessions_dir = $HOME."/.vim/sessions/"
@@ -220,7 +223,7 @@ command! S w !sudo tee %
 command! -nargs=1 MKS call MakeSession(<f-args>)
 command! -nargs=1 RSE call RecoverSession(<f-args>)
 
-"CUSTOM TABS
+""" Tabs
 function! MyTabLine()
   let s = ''
   let wn = ''
@@ -287,9 +290,6 @@ function! MyTabLabel(n)
 
 endfunction
 
-"set tabline=%!MyTabLine()
-
-set tabpagemax=15
 "good tab completion - press <tab> to autocomplete if there's a character
 "previously
 function! InsertTabWrapper()
@@ -301,10 +301,10 @@ function! InsertTabWrapper()
       endif
 endfunction
 
-""" Folding
-set nofoldenable
-vmap <space> zf
+set tabpagemax=15
+"set tabline=%!MyTabLine()
 
+""" Folding
 function! ToggleFold()
    if foldlevel('.') == 0
       " No fold exists at the current line,
@@ -345,7 +345,7 @@ function! ToggleFold()
       "execute "normal i" . l_min . "," . l . " fold"   " print debug info
 
       if l > l_min
-"         " Create the fold from l_min to l
+         " Create the fold from l_min to l
          execute l_min . "," . l . " fold"
       endif
    else
@@ -355,6 +355,10 @@ function! ToggleFold()
 endfunction
 
 nmap <space> :call ToggleFold()<CR>
+vmap <space> zf
+
+"""
+
 
 function! WriteCreatingDirs()
     execute ':silent !mkdir -p %:h'
