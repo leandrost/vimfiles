@@ -367,6 +367,7 @@ endfunction
 command W call WriteCreatingDirs()
 
 "CTRLP
+let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_prompt_mappings = {
       \ 'AcceptSelection("h")': ['<c-x>', '<c-s>'],
       \ 'AcceptSelection("e")': ['<c-r>', '<c-space>'],
