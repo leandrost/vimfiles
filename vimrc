@@ -182,6 +182,8 @@ map cU F_lct_
 map <S-Insert> <MiddleMouse>
 cmap w!! %!sudo tee > /dev/null %
 cmap qq tabclose
+map ff :Ack 
+map f* <S-*>:AckFromSearch app<CR><C-w>w<C-o><C-w>w
 
 "EMMET
 imap <c-j> <C-y>,
@@ -386,6 +388,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline_theme = 'powerlineish'
-let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_sep = '  '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#fnamemod = ':p:t'
