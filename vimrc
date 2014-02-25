@@ -184,6 +184,7 @@ cmap w!! %!sudo tee > /dev/null %
 cmap qq tabclose
 map ff :Ack 
 map f* <S-*>:AckFromSearch app<CR><C-w>w<C-o><C-w>w
+map @ :Ack 'def <cword>' app<CR><C-w>w<C-o><C-w>w
 
 "EMMET
 imap <c-j> <C-y>,
