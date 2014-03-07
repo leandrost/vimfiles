@@ -69,3 +69,6 @@
 [submodule "bundle/ack"]
 	path = bundle/ack
 	url = git@github.com:mileszs/ack.vim.git
+[submodule "bundle/rename"]
+	path = bundle/rename
+	url = git@github.com:danro/rename.vim.git
