@@ -221,8 +221,8 @@ function! GetJsSpecPath()
   return s
 endfunction
 
-map \r :let @+= "rspec ".GetSpecPath()<CR>
-map \l :let @+= "rspec ".GetSpecPath(). " -l ".line('.')<CR>
+map \r :let @+= "rspec --drb ".GetSpecPath()<CR>
+map \l :let @+= "rspec --drb ".GetSpecPath(). " -l ".line('.')<CR>
 map \j :let @+= "mocha ".GetJsSpecPath()<CR>
 
 """ Commands
