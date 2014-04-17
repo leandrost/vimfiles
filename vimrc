@@ -182,9 +182,8 @@ map cU F_lct_
 map <S-Insert> <MiddleMouse>
 cmap w!! %!sudo tee > /dev/null %
 cmap qq tabclose
-map ff :Ack 
-map f* <S-*>:AckFromSearch app<CR><C-w>w<C-o><C-w>w
-map f@ :Ack 'def <cword>' app<CR><C-w>w<C-o><C-w>w
+map <C-f>* :AckFromSearch! app<CR><C-w>w
+map <C-f>@ :Ack! 'def <cword>' app<CR><C-w>w
 
 "EMMET
 imap <c-j> <C-y>,
