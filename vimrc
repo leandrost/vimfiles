@@ -152,6 +152,7 @@ autocmd BufRead,BufNewFile *.ofx set filetype=xml
 map <C-l> :let @/=""<CR>
 map <F2> :NERDTreeToggle<CR>
 map <F3> :%!xmllint --encode UTF-8 --format -<CR>
+map <F4> xf 3xi:<ESC>
 map <F5> :e<CR>
 map <F6> obinding.pry<ESC>
 map <F12> :call ToggleBackground()<CR>
@@ -182,8 +183,8 @@ map cU F_lct_
 map <S-Insert> <MiddleMouse>
 cmap w!! %!sudo tee > /dev/null %
 cmap qq tabclose
-map <C-f>* :AckFromSearch! app<CR><C-w>w
-map <C-f>@ :Ack! 'def <cword>' app<CR><C-w>w
+map <C-f>* <S-*>:AckFromSearch! app<CR>
+map <C-f>@ :Ack! "def (self.\|)<cword>" app<CR>
 
 "EMMET
 imap <c-j> <C-y>,
@@ -367,7 +368,6 @@ vmap <space> zf
 
 """
 
-
 function! WriteCreatingDirs()
     execute ':silent !mkdir -p %:h'
     write
@@ -391,3 +391,23 @@ let g:airline_theme = 'powerlineish'
 let g:airline#extensions#tabline#left_sep = '  '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#fnamemod = ':p:t'
+
+"LongLines
+
+" Highlight EOL whitespace, http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+highlight LongLines ctermbg=darkred guibg=#382424
+"autocmd BufWinEnter * match LongLines /\%>120v.\+/
+"autocmd ColorScheme * highlight LongLines ctermbg=red guibg=red
+
+" The above flashes annoyingly while typing, be calmer in insert mode
+"autocmd InsertLeave * match LongLines /\%>120v.\+/
+"autocmd InsertEnter * match LongLines /\%>120v.\+/
+
+function! HighlightLongLines()
+    match LongLines /\%>120v.\+/
+endfunction
+command HighlightLongLines call HighlightLongLines()
+function! FixHashSyntax()
+  xf
+endfunction
+command FixHashSyntax call FixHashSyntax()
