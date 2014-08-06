@@ -23,17 +23,17 @@ set laststatus=2
 set ruler
 set showcmd
 
-""" Indentation 
+""" Indentation
 set autoindent
 set expandtab
 filetype plugin indent on
 
-autocmd FileType * set tabstop=2 
+autocmd FileType * set tabstop=2
 autocmd FileType * set softtabstop=2
 autocmd FileType * set shiftwidth=2
 
-autocmd FileType python,java set tabstop=4 
-autocmd FileType python,java set tabstop=4 
+autocmd FileType python,java set tabstop=4
+autocmd FileType python,java set tabstop=4
 autocmd FileType python,java set softtabstop=4
 
 " Display tabs and trailing spaces visually
@@ -86,7 +86,7 @@ function! SaveSession()
 endfunction
 
 function! LoadSession()
-  if argc() == 0 
+  if argc() == 0
     let myfinance_path = $HOME."/projects/myfinance/src"
     let session_name = getcwd() == myfinance_path ? g:myfinance_session : g:default_session
     call RecoverSession(session_name)
@@ -110,7 +110,7 @@ let g:bg_flag = 0
 function! ShowBackground()
   let g:bg_flag = 1
   execute 'colorscheme '.tolower(g:colors_name)
-endfunction 
+endfunction
 
 function! HideBackground()
   let g:bg_flag = 0
@@ -123,7 +123,7 @@ endfunction
 
 function! ToggleBackground()
   if g:bg_flag == 0
-    call ShowBackground() 
+    call ShowBackground()
   else
     call HideBackground()
   endif
@@ -155,6 +155,8 @@ map <F3> :%!xmllint --encode UTF-8 --format -<CR>
 map <F4> xf 3xi:<ESC>
 map <F5> :e<CR>
 map <F6> obinding.pry<ESC>
+map <F8> ve:s/_/ /g<CR><C-o><C-l>
+map <F9> :call HighlightLongLines()<CR>
 map <F12> :call ToggleBackground()<CR>
 map <S-F6> Obinding.pry<ESC>
 
@@ -191,9 +193,9 @@ imap <c-j> <C-y>,
 
 "RSPEC
 function! RunRspec(args)
-  let args = '' 
+  let args = ''
   if a:args != ''
-    let args .= ' -l '.a:args 
+    let args .= ' -l '.a:args
   end
   if a:args == '-'
     let cmd = g:last_rspec
@@ -209,8 +211,8 @@ function! GetSpecPath()
   let s = expand('%')
 
   if stridx(s, 'app/') >= 0
-    let s = substitute(s, 'app/', 'spec/', '') 
-    let s = substitute(s, '.rb', '_spec.rb', '') 
+    let s = substitute(s, 'app/', 'spec/', '')
+    let s = substitute(s, '.rb', '_spec.rb', '')
   endif
 
   return s
@@ -284,8 +286,8 @@ function! MyTabLine()
   highlight TabNumSel term=bold cterm=bold ctermfg=226 ctermbg=none
   highlight TabModFlagSel term=bold cterm=bold ctermfg=208 ctermbg=none
 
-  highlight TabLineFill cterm=none 
-  highlight TabLine cterm=none 
+  highlight TabLineFill cterm=none
+  highlight TabLine cterm=none
 
   highlight TabClose term=bold cterm=none ctermfg=255 ctermbg=none
 
