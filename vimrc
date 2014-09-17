@@ -154,6 +154,7 @@ map <F2> :NERDTreeToggle<CR>
 map <F3> :%!xmllint --encode UTF-8 --format -<CR>
 map <F4> xf 3xi:<ESC>
 map <F5> :e<CR>
+map <F7> :SyntasticCheck rubocop<CR>
 map <F6> obinding.pry<ESC>
 map <F8> ve:s/_/ /g<CR><C-o><C-l>
 map <F9> :call HighlightLongLines()<CR>
@@ -398,12 +399,12 @@ let g:airline#extensions#tabline#fnamemod = ':p:t'
 
 " Highlight EOL whitespace, http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 highlight LongLines ctermbg=darkred guibg=#382424
-"autocmd BufWinEnter * match LongLines /\%>120v.\+/
+"autocmd InsertLeave * match LongLines /\%>121v.\+/
 "autocmd ColorScheme * highlight LongLines ctermbg=red guibg=red
 
 " The above flashes annoyingly while typing, be calmer in insert mode
-"autocmd InsertLeave * match LongLines /\%>120v.\+/
-"autocmd InsertEnter * match LongLines /\%>120v.\+/
+autocmd InsertLeave * match LongLines /\%>120v.\+/
+autocmd InsertEnter * match LongLines /\%>120v.\+/
 
 function! HighlightLongLines()
     match LongLines /\%>120v.\+/
