@@ -163,15 +163,13 @@ map <S-F6> Obinding.pry<ESC>
 
 "COPY, PASTE, DELETE
 map \p "+p
-vmap <C-x> "+d<CR>
-vmap <C-c> "+y<CR>
-imap <C-v> <ESC>"+p==<space>
-
 map \y "+y
 map \yy "+yy
 map \yw "+yw
 map \yb "+yb
-
+vmap <C-x> "+d<CR>
+vmap <C-c> "+y<CR>
+imap <C-v> <ESC>"+p==<space>
 
 "MOVE LINE
 nmap <C-j> :m+<CR>==
@@ -414,3 +412,11 @@ function! FixHashSyntax()
   xf
 endfunction
 command FixHashSyntax call FixHashSyntax()
+"WindowSwap
+function! TooEasyWindowSwap()
+  call WindowSwap#EasyWindowSwap()
+  wincmd l
+  call WindowSwap#EasyWindowSwap()
+  wincmd h
+endfunction
+nnoremap <silent> <leader>wl :call TooEasyWindowSwap()<CR>
