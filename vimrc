@@ -5,7 +5,7 @@ call pathogen#helptags()
 
 """ General Config
 runtime macros/matchit.vim
-syntax on
+"syntax on
 set number
 set nowrap
 set mouse=a
@@ -160,6 +160,8 @@ map <F8> ve:s/_/ /g<CR><C-o><C-l>
 map <F9> :call HighlightLongLines()<CR>
 map <F12> :call ToggleBackground()<CR>
 map <S-F6> Obinding.pry<ESC>
+map \* :AckFromSearch! app<CR>
+map \@ :Ack! "def (self.\|)<cword>" app<CR>
 
 "COPY, PASTE, DELETE
 map \p "+p
@@ -373,7 +375,7 @@ function! WriteCreatingDirs()
     execute ':silent !mkdir -p %:h'
     write
 endfunction
-command W call WriteCreatingDirs()
+command! W call WriteCreatingDirs()
 
 "CTRLP
 let g:ctrlp_clear_cache_on_exit = 0
@@ -407,11 +409,11 @@ autocmd InsertEnter * match LongLines /\%>120v.\+/
 function! HighlightLongLines()
     match LongLines /\%>120v.\+/
 endfunction
-command HighlightLongLines call HighlightLongLines()
+command! HighlightLongLines call HighlightLongLines()
 function! FixHashSyntax()
   xf
 endfunction
-command FixHashSyntax call FixHashSyntax()
+command! FixHashSyntax call FixHashSyntax()
 "WindowSwap
 function! TooEasyWindowSwap()
   call WindowSwap#EasyWindowSwap()
