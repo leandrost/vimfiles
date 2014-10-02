@@ -196,7 +196,7 @@ imap <c-j> <C-y>,
 function! RunRspec(args)
   let args = ''
   if a:args != ''
-    let args .= ' -l '.a:args
+    let args .= ':'.a:args
   end
   if a:args == '-'
     let cmd = g:last_rspec
@@ -225,7 +225,7 @@ function! GetJsSpecPath()
 endfunction
 
 map \r :let @+= "rspec ".GetSpecPath()<CR>
-map \l :let @+= "rspec ".GetSpecPath(). " -l ".line('.')<CR>
+map \l :let @+= "rspec ".GetSpecPath(). ":".line('.')<CR>
 map \j :let @+= "mocha ".GetJsSpecPath()<CR>
 
 """ Commands
