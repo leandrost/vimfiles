@@ -161,7 +161,7 @@ map <F8> ve:s/_/ /g<CR><C-o><C-l>
 map <F9> :call HighlightLongLines()<CR>
 map <F12> :call ToggleBackground()<CR>
 map <S-F6> Obinding.pry<ESC>
-map \* :AckFromSearch! app<CR>
+map \* <S-*>:AckFromSearch! app<CR>
 map \@ :Ack! "def (self.\|)<cword>" app<CR>
 
 "COPY, PASTE, DELETE
