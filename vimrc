@@ -162,6 +162,7 @@ map <F9> :call HighlightLongLines()<CR>
 map <F12> :call ToggleBackground()<CR>
 map <S-F6> Obinding.pry<ESC>
 map \* <S-*>:AckFromSearch! app<CR>
+map \\* <S-*>:AckFromSearch! app spec<CR>
 map \@ :Ack! "def (self.\|)<cword>" app<CR>
 
 "COPY, PASTE, DELETE
@@ -173,6 +174,7 @@ map \yb "+yb
 vmap <C-x> "+d<CR>
 vmap <C-c> "+y<CR>
 imap <C-v> <ESC>"+p==<space>
+imap <C-A> <ESC>ggvG$
 
 "MOVE LINE
 nmap <C-j> :m+<CR>==
