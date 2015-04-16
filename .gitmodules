@@ -105,3 +105,9 @@
 [submodule "bundle/javascript-libraries-syntax.vim"]
 	path = bundle/javascript-libraries-syntax.vim
 	url = git@github.com:othree/javascript-libraries-syntax.vim.git
+[submodule "bundle/html5.vim"]
+	path = bundle/html5.vim
+	url = git@github.com:othree/html5.vim.git
+[submodule "mustache-handlebars"]
+	path = bundle/mustache-handlebars
+	url = git://github.com/mustache/vim-mustache-handlebars.git
