@@ -11,6 +11,7 @@ set nowrap
 set mouse=a
 set encoding=utf-8
  set nobackup
+set backupcopy=yes
 
 " only on WINDOWS
 if has("win32")
@@ -432,3 +433,6 @@ function! TooEasyWindowSwap()
   wincmd h
 endfunction
 nnoremap <silent> <leader>wl :call TooEasyWindowSwap()<CR>
+
+"vim-javascript
+let javascript_enable_domhtmlcss=1
