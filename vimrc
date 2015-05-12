@@ -10,6 +10,7 @@ set number
 set nowrap
 set mouse=a
 set encoding=utf-8
+ set nobackup
 
 " only on WINDOWS
 if has("win32")
@@ -47,8 +48,9 @@ set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
 "" set wildignore+=*vim/backups*
 "" set wildignore+=*sass-cache*
 "" set wildignore+=*DS_Store*
-set wildignore+=vendor/rails/**
-set wildignore+=vendor/cache/**
+set wildignore+=vendor/**
+"set wildignore+=vendor/rails/**
+"set wildignore+=vendor/cache/**
 set wildignore +=*.log
 set wildignore+=log/**
 set wildignore+=*/log/**
@@ -56,6 +58,8 @@ set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
 set wildignore +=*/.git
 set wildignore+=*.gem
+set wildignore+=*.gemsspec
+set wildignore+=*.sassc
 
 """" Session
 let g:sessions_dir = $HOME."/.vim/sessions/"
@@ -134,11 +138,6 @@ set hlsearch
 set incsearch
 
 """ File types
-"let javaScript_fold=1
-"let ruby_fold=1
-"let html_fold=1
-"autocmd Syntax rb,javascript,vim,gitcommit,xml,html,xhtml set foldmethod=syntax
-"autocmd Syntax rb,javascript,vim,gitcommit,xml,html,xhtml normal zR
 autocmd BufRead,BufNewFile *spec.js  set filetype=javascript.javascript-test
 autocmd BufRead,BufNewFile *Spec.js  set filetype=javascript.javascript-test
 autocmd BufRead,BufNewFile *.erb  set filetype=eruby.html
@@ -152,18 +151,22 @@ autocmd BufRead,BufNewFile *.ofx set filetype=xml
 "CUSTOM MAPS
 map <C-l> :let @/=""<CR>
 map <F2> :NERDTreeToggle<CR>
-map <F3> :%!xmllint --encode UTF-8 --format -<CR>
 map <F4> xf 3xi:<ESC>
 map <F5> :e<CR>
+autocmd BufEnter,BufRead,BufNewFile *.rb map <S-F6> Obinding.pry<ESC>
+autocmd BufEnter,BufRead,BufNewFile *.js map <S-F6> Odebugger<ESC>
 map <F7> :SyntasticCheck rubocop<CR>
-map <F6> obinding.pry<ESC>
+
 map <F8> ve:s/_/ /g<CR><C-o><C-l>
 map <F9> :call HighlightLongLines()<CR>
+map <F10> :tabe $MYVIMRC<CR>
 map <F12> :call ToggleBackground()<CR>
-map <S-F6> Obinding.pry<ESC>
+
 map \* <S-*>:AckFromSearch! app<CR>
 map \\* <S-*>:AckFromSearch! app spec<CR>
 map \@ :Ack! "def (self.\|)<cword>" app<CR>
+map \c :%s///gn<CR>
+map \i :IndentLinesToggle<CR>
 
 "COPY, PASTE, DELETE
 map \p "+p
@@ -191,6 +194,10 @@ cmap w!! %!sudo tee > /dev/null %
 cmap qq tabclose
 map <C-f>* <S-*>:AckFromSearch! app<CR>
 map <C-f>@ :Ack! "def (self.\|)<cword>" app<CR>
+
+"NERDCommenter
+map \cc :call NERDComment(0, "toggle")<CR>
+map \c<space> :call NERDComment(0, "comment")<CR>
 
 "EMMET
 imap <c-j> <C-y>,

@@ -102,3 +102,9 @@
 [submodule "bundle/nerdtree"]
 	path = bundle/nerdtree
 	url = git@github.com:scrooloose/nerdtree.git
+[submodule "bundle/handlebars"]
+	path = bundle/handlebars
+	url = git://github.com/nono/vim-handlebars.git
+[submodule "bundle/indent-line"]
+	path = bundle/indent-line
+	url = git@github.com:Yggdroot/indentLine.git
