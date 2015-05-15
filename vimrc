@@ -12,6 +12,7 @@ set mouse=a
 set encoding=utf-8
  set nobackup
 set backupcopy=yes
+set nobackup
 
 " only on WINDOWS
 if has("win32")
