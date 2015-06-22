@@ -166,7 +166,9 @@ map <F12> :call ToggleBackground()<CR>
 
 map \* <S-*>:AckFromSearch! app<CR>
 map \\* <S-*>:AckFromSearch! app spec<CR>
-map \@ :Ack! "def (self.\|)<cword>" app<CR>
+map \@ :Ack! "(def (self.\|)\|class )<cword>" app<CR>
+map \\@ :Ack! "class <cword>" app<CR>
+map \f :Ack! 
 map \c :%s///gn<CR>
 map \i :IndentLinesToggle<CR>
 
@@ -393,7 +395,7 @@ command! W call WriteCreatingDirs()
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_prompt_mappings = {
       \ 'AcceptSelection("h")': ['<c-x>', '<c-s>'],
-      \ 'AcceptSelection("e")': ['<c-r>', '<c-space>'],
+      \ 'AcceptSelection("e")': ['<c-r>', '<c-j>'],
       \ 'AcceptSelection("t")': ['<cr>', '<c-t>', '<2-LeftMouse>'],
       \ }
 
@@ -437,3 +439,6 @@ nnoremap <silent> <leader>wl :call TooEasyWindowSwap()<CR>
 
 "vim-javascript
 let javascript_enable_domhtmlcss=1
+
+"ACK
+let g:ack_autoclose = 1
