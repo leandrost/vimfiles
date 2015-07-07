@@ -10,8 +10,7 @@ set number
 set nowrap
 set mouse=a
 set encoding=utf-8
- set nobackup
-set backupcopy=yes
+set backupcopy=no
 set nobackup
 
 " only on WINDOWS
