@@ -118,3 +118,6 @@
 	path = bundle/vim-devicons
 	url = git@github.com:ryanoasis/vim-devicons.git
   ignore = untracked
+[submodule "bundle/vim-coffee-script"]
+	path = bundle/vim-coffee-script
+	url = git@github.com:kchmck/vim-coffee-script.git
