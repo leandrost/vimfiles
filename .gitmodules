@@ -136,3 +136,6 @@
 [submodule "bundle/seti"]
 	path = bundle/seti
 	url = git@github.com:trusktr/seti.vim.git
+[submodule "bundle/editor-config"]
+	path = bundle/editor-config
+	url = git@github.com:editorconfig/editorconfig-vim.git
