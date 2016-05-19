@@ -139,3 +139,6 @@
 [submodule "bundle/editor-config"]
 	path = bundle/editor-config
 	url = git@github.com:editorconfig/editorconfig-vim.git
+[submodule "bundle/file-line"]
+	path = bundle/file-line
+	url = git@github.com:bogado/file-line.git
