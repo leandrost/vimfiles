@@ -62,45 +62,6 @@ set wildignore+=*.gem
 set wildignore+=*.gemsspec
 set wildignore+=*.sassc
 
-"""" Session
-let g:sessions_dir = $HOME."/.vim/sessions/"
-let g:default_session = "default"
-let g:myfinance_session = "myfinance"
-
-function! MakeSession(session_name)
-  execute "mksession! ".g:sessions_dir.a:session_name.".vim"
-endfunction
-
-function! RecoverSession(session_name)
-  let session_file = g:sessions_dir.a:session_name.".vim"
-  if filereadable(session_file)
-    execute "source ".session_file
-    call HideBackground()
-  end
-endfunction
-
-function! SaveSession()
-  if !isdirectory(g:sessions_dir)
-    call mkdir(g:sessions_dir)
-  endif
-  if getcwd() == $HOME."/projects/myfinance/src"
-    call MakeSession(g:myfinance_session)
-  else
-    call MakeSession(g:default_session)
-  endif
-endfunction
-
-function! LoadSession()
-  if argc() == 0
-    let myfinance_path = $HOME."/projects/myfinance/src"
-    let session_name = getcwd() == myfinance_path ? g:myfinance_session : g:default_session
-    call RecoverSession(session_name)
-  endif
-endfunction
-
-autocmd VimLeave * nested call SaveSession()
-autocmd VimEnter * nested call LoadSession()
-
 """ Colors
 set t_Co=256
 set background=dark
@@ -149,11 +110,13 @@ autocmd BufRead,BufNewFile *.vb set filetype=vb
 autocmd BufRead,BufNewFile *.ofx set filetype=xml
 
 """ Key Mapping
-"CUSTOM MAPS
+"custom maps
 map <C-l> :let @/=""<CR>
-map <F2> :NERDTreeToggle<CR>
+map <F2> :NERDTreeTabsToggle<CR>
+autocmd BufRead,BufNewFile *.xml map <F3> :.!xmllint --format --recover -<CR>
 map <F4> xf 3xi:<ESC>
 map <F5> :e<CR>
+autocmd BufEnter,BufRead,BufNewFile *.haml map <S-F6> O- binding.pry<ESC>
 autocmd BufEnter,BufRead,BufNewFile *.rb map <S-F6> Obinding.pry<ESC>
 autocmd BufEnter,BufRead,BufNewFile *.js map <S-F6> Odebugger<ESC>
 map <F7> :SyntasticCheck rubocop<CR>
@@ -163,13 +126,14 @@ map <F9> :call HighlightLongLines()<CR>
 map <F10> :tabe $MYVIMRC<CR>
 map <F12> :call ToggleBackground()<CR>
 
-map \* <S-*>:AckFromSearch! app<CR>
-map \\* <S-*>:AckFromSearch! app spec<CR>
-map \@ :Ack! "(def (self.\|)\|class )<cword>" app<CR>
-map \\@ :Ack! "class <cword>" app<CR>
+map \* <S-*>:AckFromSearch! app lib<CR>
+map \\* <S-*>:AckFromSearch! app lib spec<CR>
+map \@ :Ack! "(def (self.\|)\|(class\|module) )<cword>" app<CR>
 map \f :Ack! 
 map \c :%s///gn<CR>
 map \i :IndentLinesToggle<CR>
+map \n :NERDTreeTabsToggle<CR>
+map \, :BreakLineCommas<CR>
 
 "COPY, PASTE, DELETE
 map \p "+p
@@ -195,8 +159,6 @@ map cU F_lct_
 map <S-Insert> <MiddleMouse>
 cmap w!! %!sudo tee > /dev/null %
 cmap qq tabclose
-map <C-f>* <S-*>:AckFromSearch! app<CR>
-map <C-f>@ :Ack! "def (self.\|)<cword>" app<CR>
 
 "NERDCommenter
 map \cc :call NERDComment(0, "toggle")<CR>
@@ -239,14 +201,14 @@ endfunction
 
 map \r :let @+= "rspec ".GetSpecPath()<CR>
 map \l :let @+= "rspec ".GetSpecPath(). ":".line('.')<CR>
+"map \r :execute "!dracarys bundle exec rspec ".GetSpecPath()<CR>
+"map \l :execute "!dracarys bundle exec rspec ".GetSpecPath(). ":".line('.')<CR>
 map \j :let @+= "mocha ".GetJsSpecPath()<CR>
 
 """ Commands
 command! FF FufFile
 command! BG call ToggleBackground()
 command! S w !sudo tee %
-command! -nargs=1 MKS call MakeSession(<f-args>)
-command! -nargs=1 RSE call RecoverSession(<f-args>)
 
 """ Tabs
 function! MyTabLine()
@@ -315,17 +277,6 @@ function! MyTabLabel(n)
 
 endfunction
 
-"good tab completion - press <tab> to autocomplete if there's a character
-"previously
-function! InsertTabWrapper()
-      let col = col('.') - 1
-      if !col || getline('.')[col - 1] !~ '\k'
-          return "\<tab>"
-      else
-          return "\<c-p>"
-      endif
-endfunction
-
 set tabpagemax=15
 "set tabline=%!MyTabLine()
 
@@ -390,43 +341,29 @@ function! WriteCreatingDirs()
 endfunction
 command! W call WriteCreatingDirs()
 
-"CTRLP
+"ctrlp
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_prompt_mappings = {
-      \ 'AcceptSelection("h")': ['<c-x>', '<c-s>'],
-      \ 'AcceptSelection("e")': ['<c-r>', '<c-j>'],
-      \ 'AcceptSelection("t")': ['<cr>', '<c-t>', '<2-LeftMouse>'],
+      \ 'AcceptSelection("h")': ['<C-X>', '<C-S>'],
+      \ 'AcceptSelection("e")': ['<C-R>', '<C-O>'],
+      \ 'AcceptSelection("t")': ['<CR>', '<C-T>', '<2-LeftMouse>'],
       \ }
+let g:ctrlp_root_markers = ['Gemfile', 'package.json']
 
-"Airline
+"airline
+let g:airline_theme = 'powerlineish'
 let g:airline_powerline_fonts = 1
+let g:airline_detect_modified=1
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 let g:airline#extensions#tabline#show_buffers = 0
-let g:airline_theme = 'powerlineish'
 let g:airline#extensions#tabline#left_sep = '  '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#fnamemod = ':p:t'
 
-"LongLines
-
-" Highlight EOL whitespace, http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-highlight LongLines ctermbg=darkred guibg=#382424
-"autocmd InsertLeave * match LongLines /\%>121v.\+/
-"autocmd ColorScheme * highlight LongLines ctermbg=red guibg=red
-
-" The above flashes annoyingly while typing, be calmer in insert mode
-autocmd InsertLeave * match LongLines /\%>120v.\+/
-autocmd InsertEnter * match LongLines /\%>120v.\+/
-
-function! HighlightLongLines()
-    match LongLines /\%>120v.\+/
-endfunction
-command! HighlightLongLines call HighlightLongLines()
-function! FixHashSyntax()
-  xf
-endfunction
 command! FixHashSyntax call FixHashSyntax()
+
 "WindowSwap
 function! TooEasyWindowSwap()
   call WindowSwap#EasyWindowSwap()
@@ -439,5 +376,17 @@ nnoremap <silent> <leader>wl :call TooEasyWindowSwap()<CR>
 "vim-javascript
 let javascript_enable_domhtmlcss=1
 
-"ACK
+"vim-jsx
+"let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+
+"ack
 let g:ack_autoclose = 1
+
+"syntastic
+let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
+let g:syntastic_javascript_checkers = ['jshint']
+"let g:syntastic_ruby_checkers = ['rubocop']
+
+"nerdtree
+let g:NERDTreeShowLineNumbers=1
+
