@@ -6,5 +6,10 @@ function! BreakLineCommas()
   execute 'normal! v$'.current_line.'gg=='
 endfunction
 
+function! ExecShouldClean()
+  execute ':!should_clean -d %'
+endfunction
+
 command! BreakLineCommas call BreakLineCommas()
+command! ShouldClean call ExecShouldClean()
 
