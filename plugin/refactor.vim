@@ -12,4 +12,3 @@ endfunction
 
 command! BreakLineCommas call BreakLineCommas()
 command! ShouldClean call ExecShouldClean()
-

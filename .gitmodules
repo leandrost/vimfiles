@@ -145,3 +145,6 @@
 [submodule "bundle/vim-hybrid-material"]
 	path = bundle/vim-hybrid-material
 	url = git@github.com:kristijanhusak/vim-hybrid-material.git
+[submodule "bundle/vim-startify"]
+	path = bundle/vim-startify
+	url = git@github.com:mhinz/vim-startify.git
