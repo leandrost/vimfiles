@@ -151,3 +151,6 @@
 [submodule "bundle/vim-airline-themes"]
 	path = bundle/vim-airline-themes
 	url = git@github.com:vim-airline/vim-airline-themes.git
+[submodule "bundle/vimcaps"]
+	path = bundle/vimcaps
+	url = git@github.com:suxpert/vimcaps.git
