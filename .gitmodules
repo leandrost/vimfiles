@@ -76,9 +76,6 @@
 [submodule "bundle/vim-surround"]
 	path = bundle/vim-surround
 	url = git://github.com/tpope/vim-surround.git
-[submodule "bundle/syntastic"]
-	path = bundle/syntastic
-	url = https://github.com/scrooloose/syntastic.git
 [submodule "bundle/vim-windowswap"]
 	path = bundle/vim-windowswap
 	url = git@github.com:wesQ3/vim-windowswap.git
@@ -137,3 +134,6 @@
 [submodule "bundle/vim-airline-themes"]
 	path = bundle/vim-airline-themes
 	url = git@github.com:vim-airline/vim-airline-themes.git
+[submodule "bundle/ale"]
+	path = bundle/ale
+	url = git@github.com:w0rp/ale.git
