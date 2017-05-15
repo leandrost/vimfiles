@@ -1,0 +1,9 @@
+snippet cn
+	module ${1:`substitute(vim_snippets#Filename(), "\(_\|^\)\(.\)", "\u\2", "g")`}
+		extend ActiveSupport::Concern
+
+		${0}
+	end
+
+
+
