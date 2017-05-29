@@ -1,8 +1,8 @@
-function! MyFiletype(name)
+function! mytabline#symbol(name)
   return WebDevIconsGetFileTypeSymbol(a:name)
 endfunction
 
-function! Tabline()
+function! mytabline#execute()
   let s = ''
   for i in range(tabpagenr('$'))
     let tab = i + 1
@@ -19,13 +19,14 @@ function! Tabline()
     let s .= tab .' '
     let s .= (bufname != '' ? fnamemodify(bufname, ':t') : '[No Name]')
 
+
     if bufmodified
       let s .= '+ '
     else
       let s .= '  '
     endif
 
-    let s .= MyFiletype(bufname)
+    let s .= mytabline#symbol(bufname)
   endfor
 
   let s .= '%#TabLineFill#'
@@ -33,4 +34,10 @@ function! Tabline()
   return s
 endfunction
 
-set tabline=%!Tabline()
+function! mytabline#colors()
+  hi TabLineFill ctermfg=232
+  hi TabLine ctermfg=237 ctermbg=255
+endfunction
+
+set tabline=%!mytabline#execute()
+call mytabline#colors()

@@ -2,6 +2,7 @@ function! ShowBackground()
   let g:bg_flag = 1
   highlight LineNr ctermfg=237
   execute 'colorscheme '.tolower(g:colors_name)
+  call mytabline#colors()
 endfunction
 
 function! HideBackground()
