@@ -10,6 +10,7 @@ function! HideBackground()
   highlight Normal ctermbg=none
   highlight NonText ctermbg=none
   highlight LineNr ctermbg=none ctermfg=245
+  highlight Visual term=reverse cterm=reverse
 endfunction
 
 function! background#ToggleBackground()

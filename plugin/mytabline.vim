@@ -36,7 +36,7 @@ endfunction
 
 function! mytabline#colors()
   hi TabLineFill ctermfg=232
-  hi TabLine ctermfg=237 ctermbg=255
+  hi TabLine ctermfg=248 ctermbg=232
 endfunction
 
 set tabline=%!mytabline#execute()
