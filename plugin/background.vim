@@ -21,8 +21,4 @@ function! background#ToggleBackground()
   endif
 endfunction
 
-function! WriteCreatingDirs()
-    execute ':silent !mkdir -p %:h'
-    write
-endfunction
-
+call HideBackground()

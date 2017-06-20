@@ -5,5 +5,11 @@ snippet cn
 		${0}
 	end
 
-
-
+snippet int
+	module ${1:`substitute(expand('%:p:h:t'), "\(\%(\<\l\+\)\%(_\)\@=\)\|_\(\l\)", "\u\1\2", "g")`}
+		class ${2:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`} < ActiveInteraction::Base
+			def execute
+				${0}
+			end
+		end
+	end
