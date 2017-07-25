@@ -10,15 +10,21 @@ function! HideBackground()
   highlight Normal ctermbg=none
   highlight NonText ctermbg=none
   highlight LineNr ctermbg=none ctermfg=245
-  highlight Visual term=reverse cterm=reverse
+  highlight Visual ctermbg=232
 endfunction
 
-function! background#ToggleBackground()
+function! theme#ToggleBackground()
   if g:bg_flag == 0
     call ShowBackground()
   else
     call HideBackground()
   endif
 endfunction
+
+syntax on
+set t_Co=256
+set background=dark
+colorscheme hybrid_material
+highlight! link QuickFixLine Normal
 
 call HideBackground()
