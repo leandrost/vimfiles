@@ -5,7 +5,6 @@ snippet cn
 		${0}
 	end
 
-
 snippet int
 	module ${1:`substitute(expand('%:p:h:t'), '\(_\|^\)\(.\)', '\u\2', 'g')`}
 		class ${2:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`} < ActiveInteraction::Base
@@ -15,7 +14,7 @@ snippet int
 		end
 	end
 
-snippet spi
+snippet sint
 	require "rails_helper"
 
 	describe ${1:`snippets#interaction_spec_name()`} do
@@ -25,4 +24,5 @@ snippet spi
 			${0}
 		end
 	end
+
 
