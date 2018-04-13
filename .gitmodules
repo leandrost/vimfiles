@@ -137,3 +137,6 @@
 [submodule "bundle/ale"]
 	path = bundle/ale
 	url = git@github.com:w0rp/ale.git
+[submodule "bundle/vim-grammarous"]
+	path = bundle/vim-grammarous
+	url = git@github.com:rhysd/vim-grammarous.git
