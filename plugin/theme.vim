@@ -21,10 +21,9 @@ function! theme#ToggleBackground()
   endif
 endfunction
 
+let g:bg_flag = 1
 syntax on
 set t_Co=256
 set background=dark
 colorscheme hybrid_material
 highlight! link QuickFixLine Normal
-
-call HideBackground()
