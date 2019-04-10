@@ -140,3 +140,6 @@
 [submodule "bundle/vim-grammarous"]
 	path = bundle/vim-grammarous
 	url = git@github.com:rhysd/vim-grammarous.git
+[submodule "bundle/fzf"]
+	path = bundle/fzf
+	url = git@github.com:junegunn/fzf.vim.git
