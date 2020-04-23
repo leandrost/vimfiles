@@ -143,3 +143,9 @@
 [submodule "bundle/fzf"]
 	path = bundle/fzf
 	url = git@github.com:junegunn/fzf.vim.git
+[submodule "bundle/vim-vue"]
+	path = bundle/vim-vue
+	url = git@github.com:posva/vim-vue.git
+[submodule "bundle/vim-caser"]
+	path = bundle/vim-caser
+	url = git@github.com:arthurxavierx/vim-caser.git
