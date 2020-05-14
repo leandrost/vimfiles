@@ -27,6 +27,7 @@ function! mytabline#execute()
     endif
 
     let s .= mytabline#symbol(bufname)
+    let s .= '  '
   endfor
 
   let s .= '%#TabLineFill#'
