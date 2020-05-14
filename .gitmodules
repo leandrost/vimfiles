@@ -2,10 +2,6 @@
 	path = bundle/emmet
 	url = git@github.com:vim-scripts/Emmet.vim.git
   ignore = untracked
-[submodule "bundle/ctrlp"]
-	path = bundle/ctrlp
-	url = git@github.com:kien/ctrlp.vim.git
-  ignore = untracked
 [submodule "bundle/tlib"]
 	path = bundle/tlib
 	url = git@github.com:tomtom/tlib_vim.git
@@ -149,3 +145,6 @@
 [submodule "bundle/vim-caser"]
 	path = bundle/vim-caser
 	url = git@github.com:arthurxavierx/vim-caser.git
+[submodule "bundle/ctrlp"]
+	path = bundle/ctrlp
+	url = git@github.com:ctrlpvim/ctrlp.vim.git
