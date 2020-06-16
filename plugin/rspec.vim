@@ -17,11 +17,33 @@ function! GetSpecPath()
   let s = expand('%')
 
   if stridx(s, 'app/') >= 0
+    let s = substitute(s, 'src/', 'spec/', '')
     let s = substitute(s, 'app/', 'spec/', '')
     let s = substitute(s, '.rb', '_spec.rb', '')
   endif
 
   return s
+endfunction
+
+function! AlternateToSpec()
+  let file_path = expand('%r')
+
+  if stridx(file_path, 'app/') >= 0
+    let file_path = substitute(file_path, 'app/', 'spec/', '')
+    let file_path = substitute(file_path, '.rb', '_spec.rb', '')
+
+  elseif stridx(file_path, 'src/') >= 0
+
+    let file_path = substitute(file_path, 'src/', 'spec/', '')
+    let file_path = substitute(file_path, '.rb', '_spec.rb', '')
+
+  elseif stridx(file_path, 'spec/') >= 0
+
+    let file_path = substitute(file_path, 'spec/', 'src/', '')
+    let file_path = substitute(file_path, '_spec.rb','.rb',  '')
+  endif
+
+  execute 'edit '.file_path
 endfunction
 
 function! GetJsSpecPath()
