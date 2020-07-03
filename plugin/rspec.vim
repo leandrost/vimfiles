@@ -29,13 +29,22 @@ function! AlternateToSpec()
   let file_path = expand('%r')
 
   if stridx(file_path, 'app/') >= 0
-    let file_path = substitute(file_path, 'app/', 'spec/', '')
+    let file_path = substitute(file_path, '/app/', '/spec/', '')
     let file_path = substitute(file_path, '.rb', '_spec.rb', '')
+
+  elseif stridx(file_path, 'lib/') >= 0
+    let file_path = substitute(file_path, 'lib/', 'spec/', '')
+    let file_path = substitute(file_path, '.rb', '_spec.rb', '')
+    let file_path = substitute(file_path, '.rake', '_spec.rb', '')
 
   elseif stridx(file_path, 'src/') >= 0
 
     let file_path = substitute(file_path, 'src/', 'spec/', '')
     let file_path = substitute(file_path, '.rb', '_spec.rb', '')
+
+  elseif stridx(file_path, 'spec/tasks') >= 0
+    let file_path = substitute(file_path, 'spec/', 'lib/', '')
+    let file_path = substitute(file_path, '_spec.rb','.rake',  '')
 
   elseif stridx(file_path, 'spec/') >= 0
 
