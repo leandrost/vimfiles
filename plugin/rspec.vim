@@ -16,11 +16,19 @@ endfunction
 function! GetSpecPath()
   let s = expand('%')
 
+  if stridx(s, '_spec.rb') >= 0
+    return s
+  endif
+
   if stridx(s, 'app/') >= 0
     let s = substitute(s, 'src/', 'spec/', '')
     let s = substitute(s, 'app/', 'spec/', '')
     let s = substitute(s, '.rb', '_spec.rb', '')
   endif
+
+  if stridx(s, 'web-app/') >= 0
+    let s = substitute(s, 'web-app/', '', '')
+  end
 
   return s
 endfunction
@@ -28,8 +36,9 @@ endfunction
 function! AlternateToSpec()
   let file_path = expand('%r')
 
-  if stridx(file_path, 'app/') >= 0
-    let file_path = substitute(file_path, '/app/', '/spec/', '')
+  if stridx(file_path, '.*app/') >= 0
+    let file_path = substitute(file_path, 'app/', 'spec/', '')
+    let file_path = substitute(file_path, 'web-spec/', 'spec/', '')
     let file_path = substitute(file_path, '.rb', '_spec.rb', '')
 
   elseif stridx(file_path, 'lib/') >= 0

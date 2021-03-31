@@ -14,6 +14,7 @@ function! mytabline#execute()
 
     let s .= '%' . tab . 'T'
     let s .= (tab == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
+    " let s .= (tab == tabpagenr() ? '%#TabLineSel#'.'-' : '%#TabLine#'.'=')
     let s .= ' '
 
     let s .= tab .' '
