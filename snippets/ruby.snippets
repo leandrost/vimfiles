@@ -24,6 +24,27 @@ snippet sint
 			${0}
 		end
 	end
+snippet cll
+	module ${1:`substitute(expand('%:p:h:t'), '\(_\|^\)\(.\)', '\u\2', 'g')`}
+		class ${2:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`} < Callable
+			def call${3}
+				${0}
+			end
+		end
+	end
+
+snippet scll
+	require 'rails_helper'
+
+	describe ${1:`snippets#interaction_spec_name()`} do
+		describe '.call' do
+			subject(:call) { described_class.call${2} }
+
+			it '${3:`spec_name`}' do
+			  ${0}
+			end
+		end
+	end
 
 snippet letdo
 	let(:${1:object}) do
