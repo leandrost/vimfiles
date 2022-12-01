@@ -21,18 +21,29 @@ function! GetSpecPath()
   endif
 
   if stridx(s, 'app/') >= 0
-    " let s = substitute(s, 'src/', 'spec/', '')
     let s = substitute(s, 'app/', 'spec/', '')
     let s = substitute(s, '.rb', '_spec.rb', '')
   endif
 
-  " if stridx(s, 'web-app/') >= 0
-  "   let s = substitute(s, 'web-app/', '', '')
-  " end
-
   return s
 endfunction
 
+
+function! SmartAlternate()
+  try
+    execute 'A'
+  catch
+    execute 'call AlternateToSpecPath()'
+  endtry
+endfunction
+
+function! Alternate()
+  try
+    execute 'A'
+  catch
+    execute 'edit '.rails#buffer().alternate(0)
+  endtry
+endfunction
 
 function! AlternateToSpecPath()
   let s = expand('%')
@@ -41,45 +52,11 @@ function! AlternateToSpecPath()
     let s = substitute(s, 'spec/', 'app/', '')
     let s = substitute(s, '_spec.rb', '.rb', '')
   else
-    echo '0'
     let s = substitute(s, 'app/', 'spec/', '')
     let s = substitute(s, '.rb', '_spec.rb', '')
   endif
 
   execute 'edit '.s
-endfunction
-
-function! AlternateToSpec()
-  let file_path = expand('%r')
-  echo file_path
-
-  if stridx(file_path, '.*app/') >= 0
-    let file_path = substitute(file_path, 'app/', 'spec/', '')
-    " let file_path = substitute(file_path, 'web-spec/', 'spec/', '')
-    let file_path = substitute(file_path, '.rb', '_spec.rb', '')
-
-  elseif stridx(file_path, 'lib/') >= 0
-    let file_path = substitute(file_path, 'lib/', 'spec/', '')
-    let file_path = substitute(file_path, '.rb', '_spec.rb', '')
-    let file_path = substitute(file_path, '.rake', '_spec.rb', '')
-
-  " elseif stridx(file_path, 'src/') >= 0
-
-  "   let file_path = substitute(file_path, 'src/', 'spec/', '')
-  "   let file_path = substitute(file_path, '.rb', '_spec.rb', '')
-
-  elseif stridx(file_path, 'spec/tasks') >= 0
-    let file_path = substitute(file_path, 'spec/', 'lib/', '')
-    let file_path = substitute(file_path, '_spec.rb','.rake',  '')
-
-  elseif stridx(file_path, 'spec/') >= 0
-
-    let file_path = substitute(file_path, 'spec/', 'app/', '')
-    " let file_path = substitute(file_path, 'spec/', 'src/', '')
-    let file_path = substitute(file_path, '_spec.rb','.rb',  '')
-  endif
-
-  execute 'edit '.file_path
 endfunction
 
 function! GetJsSpecPath()
