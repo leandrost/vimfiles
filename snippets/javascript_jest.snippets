@@ -1,0 +1,191 @@
+## EXPECT
+snippet exp
+	expect(${1})${2};
+
+snippet ebe
+	expect(${1}).toBe(${2});
+
+snippet ecall
+	expect(${1}).toHaveBeenCalled();
+
+snippet ecallt
+	expect(${1}).toHaveBeenCalledTimes(${2});
+
+snippet ecallw
+	expect(${1}).toHaveBeenCalledWith(${2});
+
+snippet ecloseto
+	expect(${1}).toBeCloseTo(${2}, ${3});
+
+snippet edef
+	expect(${1}).toBeDefined();
+
+snippet efalsy
+	expect(${1}).toBeFalsy();
+
+ippet egreater
+	expect(${1}).toBeGreaterThan(${2});
+
+snippet egreateror
+	expect(${1}).toBeGreaterThanOrEqual(${2});
+
+snippet eless
+	expect(${1}).toBeLessThan(${2});
+
+snippet elessor
+	expect(${1}).toBeLessThanOrEqual(${2});
+
+snippet einst
+	expect(${1}).toBeInstanceOf(${2});
+
+snippet enull
+	expect(${1}).toBeNull();
+
+snippet etruthy
+	expect(${1}).toBeTruthy();
+
+snippet eundef
+	expect(${1}).toBeUndefined();
+
+snippet econ
+	expect(${1}).toContain(${2});
+
+snippet econeq
+	expect(${1}).toContainEqual(${2});
+
+snippet eeq
+	expect(${1}).toEqual(${2});
+
+snippet eleng
+	expect(${1}).toHaveLength(${2});
+
+snippet emat
+	expect(${1}).toMatch(${2});
+
+snippet ematob
+	expect(${1}).toMatchObject(${2});
+
+snippet ematsnap
+	expect(${1}).toMatchSnapshot(${2});
+
+snippet ethrow
+	expect(${1}).toThrow(${2});
+
+# GLOBALS
+
+snippet jsetup
+	import ${1} from './${1}';
+	describe('${1}', () => {
+	test('${2}', () => {
+		${3}
+	});
+	});
+
+snippet desc
+	describe('${1}', () => {
+		${0}
+	});
+
+snippet test
+	test('${1}', () => {
+		${2}
+	});
+
+snippet it
+	it('${1}', () => {
+		${2}
+	});
+
+snippet aftera
+	afterAll(() => {
+		${1}
+	});
+
+snippet aftere
+	afterEach(() => {
+		${1}
+	});
+
+snippet beforea
+	beforeAll(() => {
+		${1}
+	});
+
+snippet beforee
+	beforeEach(() => {
+		${1}
+	});
+
+## MOCK
+
+snippet mclear
+	.mockClear();
+
+snippet mreset
+	.mockReset();
+
+snippet mimpl
+	.mockImplementation(${1});
+
+snippet mimplonce
+	.mockImplementationOnce(${1});
+
+snippet mrett
+	.mockReturnThis();
+
+snippet mretval
+	.mockReturnValue(${1});
+
+snippet mretvalo
+	.mockReturnValueOnce(${1});
+
+## JEST
+
+snippet jcleartimers
+	jest.clearAllTimers();
+
+snippet jdisableautomock
+	jest.disableAutomock();
+
+snippet jenableautomock
+	jest.enableAutomock();
+
+snippet jfn
+	jest.fn(${1});
+
+snippet jismock
+	jest.isMockFunction(${1});
+
+snippet jgenmock
+	jest.genMockFromModule(${1});
+
+snippet jmock
+	jest.mock(${1});
+
+snippet jresetallmocks
+	jest.resetAllMocks();
+
+snippet jresetmodules
+	jest.resetModules();
+
+snippet jrunticks
+	jest.runAllTicks();
+
+snippet jruntimers
+	jest.runAllTimers();
+
+snippet jrunpendtimers
+	jest.runOnlyPendingTimers();
+
+snippet jsetmock
+	jest.setMock(${1});
+
+snippet junmock
+	jest.unmock(${1});
+
+snippet jfaketimers
+	jest.useFakeTimers(${1});
+
+snippet jrealtimers
+	jest.useRealTimers(${1});
+
