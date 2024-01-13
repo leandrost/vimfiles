@@ -105,9 +105,6 @@
 [submodule "bundle/vim-jsx"]
 	path = bundle/vim-jsx
 	url = git@github.com:mxw/vim-jsx.git
-[submodule "bundle/vim-es6"]
-	path = bundle/vim-es6
-	url = git@github.com:isRuslan/vim-es6.git
 [submodule "bundle/vim-nerdtree-tabs"]
 	path = bundle/vim-nerdtree-tabs
 	url = git@github.com:jistr/vim-nerdtree-tabs.git
