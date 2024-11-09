@@ -71,8 +71,8 @@
 [submodule "bundle/vim-windowswap"]
 	path = bundle/vim-windowswap
 	url = git@github.com:wesQ3/vim-windowswap.git
-[submodule "bundle/puppet"]
-	path = bundle/puppet
+[submodule "bundle/vim-puppet"]
+	path = bundle/vim-puppet
 	url = git://github.com/rodjek/vim-puppet.git
 [submodule "bundle/nerdcommenter"]
 	path = bundle/nerdcommenter
